@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-body text-secondary-navy bg-neutral-softWhite;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading text-primary-blue mb-4;
+  }
+
+  h1 {
+    @apply text-5xl font-bold;
+  }
+
+  h2 {
+    @apply text-4xl font-semibold;
+  }
+
+  h3 {
+    @apply text-2xl font-semibold;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply px-8 py-3 rounded font-semibold uppercase tracking-wider transition-all duration-300 inline-block text-center;
+  }
+
+  .btn-primary {
+    @apply bg-primary-blue text-white hover:bg-secondary-navy hover:-translate-y-1 shadow-md;
+  }
+
+  .btn-gold {
+    @apply bg-primary-gold text-secondary-navy hover:bg-yellow-600 hover:-translate-y-1 shadow-md;
+  }
+
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .section {
+    @apply py-20;
+  }
+}
