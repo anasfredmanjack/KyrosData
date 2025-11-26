@@ -1,7 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-require('dotenv').config();
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -16,8 +17,8 @@ if (!MONGODB_URI) {
     console.warn("MONGODB_URI is not defined. Database features will not work.");
 } else {
     mongoose.connect(MONGODB_URI)
-    .then(() => console.log('MongoDB Connected'))
-    .catch(err => console.error('MongoDB Connection Error:', err));
+        .then(() => console.log('MongoDB Connected'))
+        .catch(err => console.error('MongoDB Connection Error:', err));
 }
 
 // Routes

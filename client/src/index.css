@@ -29,19 +29,32 @@
   h3 {
     @apply text-2xl font-semibold;
   }
+
+  * {
+    scroll-behavior: smooth;
+  }
 }
 
 @layer components {
   .btn {
-    @apply px-8 py-3 rounded font-semibold uppercase tracking-wider transition-all duration-300 inline-block text-center;
+    @apply px-8 py-3 rounded-lg font-semibold uppercase tracking-wider transition-all duration-300 inline-block text-center relative overflow-hidden;
+  }
+
+  .btn::before {
+    content: '';
+    @apply absolute inset-0 bg-white/20 transform -translate-x-full transition-transform duration-300;
+  }
+
+  .btn:hover::before {
+    @apply translate-x-0;
   }
 
   .btn-primary {
-    @apply bg-primary-blue text-white hover:bg-secondary-navy hover:-translate-y-1 shadow-md;
+    @apply bg-primary-blue text-white hover:bg-secondary-navy hover:-translate-y-1 hover:shadow-xl shadow-md;
   }
 
   .btn-gold {
-    @apply bg-primary-gold text-secondary-navy hover:bg-yellow-600 hover:-translate-y-1 shadow-md;
+    @apply bg-primary-gold text-secondary-navy hover:bg-yellow-600 hover:-translate-y-1 hover:shadow-xl shadow-md;
   }
 
   .container-custom {
@@ -51,4 +64,44 @@
   .section {
     @apply py-20;
   }
+
+  .gradient-text {
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-primary-blue to-primary-gold;
+  }
+
+  .glass-effect {
+    @apply bg-white/10 backdrop-blur-lg border border-white/20;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-2xl hover:-translate-y-2;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  animation: shimmer 3s infinite;
+  background: linear-gradient(to right, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
+  background-size: 1000px 100%;
 }

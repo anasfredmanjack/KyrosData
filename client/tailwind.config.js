@@ -12,6 +12,7 @@ export default {
                     gold: '#D4AF37',
                 },
                 secondary: {
+                    
                     navy: '#0A1A2F',
                 },
                 neutral: {

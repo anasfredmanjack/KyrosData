@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaPaperPlane } from 'react-icons/fa';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 import { services } from '../data/services';
 import { packages } from '../data/packages';
 
@@ -35,14 +36,17 @@ const Contact = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setStatus('sending');
+        const loadingToast = toast.loading('Sending message...');
         try {
             const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
             await axios.post(`${apiUrl}/contact`, formData);
             setStatus('success');
+            toast.success('Message sent successfully! We will contact you shortly.', { id: loadingToast });
             setFormData({ name: '', email: '', phone: '', service: '', package: '', message: '' });
         } catch (error) {
             console.error('Error sending message:', error);
             setStatus('error');
+            toast.error('Failed to send message. Please try again later.', { id: loadingToast });
         }
     };
 
@@ -58,47 +62,56 @@ const Contact = () => {
 
             <section className="section container-custom">
                 <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
-                    <div className="lg:col-span-2 space-y-8">
+                    <motion.div 
+                        className="lg:col-span-2 space-y-8"
+                        initial={{ opacity: 0, x: -50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
+                    >
                         <div>
                             <h2 className="text-3xl font-bold mb-6 text-primary-blue font-heading">Get In Touch</h2>
                             <p className="text-gray-600 mb-8 leading-relaxed">Have questions about our services or packages? Reach out to us today via phone, email, or visit our office.</p>
                         </div>
 
-                        <div className="space-y-8">
-                            <div className="flex gap-5 group">
-                                <div className="w-14 h-14 bg-blue-50 rounded-full flex items-center justify-center text-primary-gold text-2xl flex-shrink-0 group-hover:bg-primary-blue group-hover:text-white transition-colors duration-300">
-                                    <FaMapMarkerAlt />
-                                </div>
-                                <div>
-                                    <h3 className="text-xl font-bold mb-2 text-secondary-navy">Visit Us</h3>
-                                    <p className="text-gray-600 leading-relaxed">D34 Iyemi Plaza Along Lokogoma Gudu Road Abuja</p>
-                                </div>
-                            </div>
-
-                            <div className="flex gap-5 group">
-                                <div className="w-14 h-14 bg-blue-50 rounded-full flex items-center justify-center text-primary-gold text-2xl flex-shrink-0 group-hover:bg-primary-blue group-hover:text-white transition-colors duration-300">
-                                    <FaPhone />
-                                </div>
-                                <div>
-                                    <h3 className="text-xl font-bold mb-2 text-secondary-navy">Call Us</h3>
-                                    <p className="text-gray-600">09047575374</p>
-                                    <p className="text-gray-600">0701 093 5596</p>
-                                </div>
-                            </div>
-
-                            <div className="flex gap-5 group">
-                                <div className="w-14 h-14 bg-blue-50 rounded-full flex items-center justify-center text-primary-gold text-2xl flex-shrink-0 group-hover:bg-primary-blue group-hover:text-white transition-colors duration-300">
-                                    <FaEnvelope />
-                                </div>
-                                <div>
-                                    <h3 className="text-xl font-bold mb-2 text-secondary-navy">Email Us</h3>
-                                    <p className="text-gray-600">KyrosDoxa@Gmail.com</p>
-                                </div>
-                            </div>
+                        <div className="space-y-6">
+                            {[
+                                { icon: FaMapMarkerAlt, title: 'Visit Us', content: 'D34 Iyemi Plaza Along Lokogoma Gudu Road Abuja' },
+                                { icon: FaPhone, title: 'Call Us', content: ['09047575374', '0701 093 5596'] },
+                                { icon: FaEnvelope, title: 'Email Us', content: 'KyrosDoxa@Gmail.com' }
+                            ].map((item, index) => (
+                                <motion.div 
+                                    key={index}
+                                    className="flex gap-5 group bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition-all"
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: index * 0.1 }}
+                                    whileHover={{ x: 10 }}
+                                >
+                                    <div className="w-16 h-16 bg-blue-50 rounded-xl flex items-center justify-center text-primary-gold text-2xl flex-shrink-0 group-hover:bg-primary-blue group-hover:text-white transition-all duration-300 group-hover:scale-110">
+                                        <item.icon />
+                                    </div>
+                                    <div>
+                                        <h3 className="text-xl font-bold mb-2 text-secondary-navy group-hover:text-primary-blue transition-colors">{item.title}</h3>
+                                        {Array.isArray(item.content) ? (
+                                            item.content.map((line, i) => <p key={i} className="text-gray-600">{line}</p>)
+                                        ) : (
+                                            <p className="text-gray-600 leading-relaxed">{item.content}</p>
+                                        )}
+                                    </div>
+                                </motion.div>
+                            ))}
                         </div>
-                    </div>
+                    </motion.div>
 
-                    <div className="lg:col-span-3 bg-white p-10 rounded-2xl shadow-xl border border-gray-100">
+                    <motion.div 
+                        className="lg:col-span-3 bg-white p-10 rounded-2xl shadow-xl border border-gray-100"
+                        initial={{ opacity: 0, x: 50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
+                    >
                         <h2 className="text-2xl font-bold mb-8 text-secondary-navy font-heading">Send a Message</h2>
                         <form onSubmit={handleSubmit} className="space-y-6">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -182,27 +195,8 @@ const Contact = () => {
                             <button type="submit" className="btn btn-primary w-full flex items-center justify-center gap-2 text-lg" disabled={status === 'sending'}>
                                 {status === 'sending' ? 'Sending...' : <><FaPaperPlane /> Send Message</>}
                             </button>
-
-                            {status === 'success' && (
-                                <motion.div
-                                    initial={{ opacity: 0, y: 10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    className="bg-green-50 text-green-700 p-4 rounded-lg text-center font-semibold border border-green-200"
-                                >
-                                    Message sent successfully! We will contact you shortly.
-                                </motion.div>
-                            )}
-                            {status === 'error' && (
-                                <motion.div
-                                    initial={{ opacity: 0, y: 10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    className="bg-red-50 text-red-700 p-4 rounded-lg text-center font-semibold border border-red-200"
-                                >
-                                    Failed to send message. Please try again later.
-                                </motion.div>
-                            )}
                         </form>
-                    </div>
+                    </motion.div>
                 </div>
             </section>
 

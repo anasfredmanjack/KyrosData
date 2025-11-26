@@ -93,7 +93,7 @@ const Home = () => {
             </section>
 
             {/* Stats Section */}
-            <section className="py-12 bg-white relative z-30 -mt-12 mx-4 md:mx-12 rounded-xl shadow-xl border border-gray-100">
+            <section className="py-12 bg-white relative z-30 -mt-12 mx-4 md:mx-12 rounded-2xl shadow-2xl border border-gray-100">
                 <div className="container-custom">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-gray-100">
                         {[
@@ -102,43 +102,67 @@ const Home = () => {
                             { number: "24/7", label: "Expert Support" },
                             { number: "10+", label: "Countries" }
                         ].map((stat, index) => (
-                            <div key={index} className="p-4">
-                                <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-blue mb-2 font-heading">{stat.number}</div>
+                            <motion.div 
+                                key={index} 
+                                className="p-6 group cursor-default"
+                                initial={{ opacity: 0, scale: 0.5 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: index * 0.1, type: "spring", stiffness: 200 }}
+                                whileHover={{ scale: 1.1 }}
+                            >
+                                <div className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-blue mb-3 font-heading group-hover:text-primary-gold transition-colors">{stat.number}</div>
                                 <div className="text-gray-600 font-semibold uppercase tracking-wide text-xs md:text-sm">{stat.label}</div>
-                            </div>
+                            </motion.div>
                         ))}
                     </div>
                 </div>
             </section>
 
             {/* Features Section */}
-            <section className="section bg-neutral-softWhite">
-                <div className="container-custom">
-                    <div className="text-center mb-16 max-w-3xl mx-auto">
-                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-secondary-navy font-heading">Why Choose <span className="text-primary-blue">Kyros</span><span className="text-primary-gold">Doxa</span>?</h2>
-                        <p className="text-lg md:text-xl text-gray-700">We make international relocation simple, transparent, and life-changing.</p>
-                    </div>
+            <section className="section bg-neutral-softWhite relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-96 h-96 bg-primary-blue/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+                <div className="absolute bottom-0 right-0 w-96 h-96 bg-primary-gold/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
+                
+                <div className="container-custom relative z-10">
+                    <motion.div 
+                        className="text-center mb-20 max-w-3xl mx-auto"
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                    >
+                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-secondary-navy font-heading">
+                            Why Choose <span className="text-primary-blue">Kyros</span><span className="text-primary-gold">Doxa</span>?
+                        </h2>
+                        <p className="text-xl md:text-2xl text-gray-700">We make international relocation simple, transparent, and life-changing.</p>
+                    </motion.div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
                         {[
-                            { icon: FaBriefcase, title: "Verified Jobs", desc: "Access legitimate employment opportunities with trusted employers in Ireland, Germany, and across Europe." },
-                            { icon: FaUserMd, title: "Expert Guidance", desc: "Benefit from our specialized knowledge in visa applications, work permits, and international recruitment standards." },
-                            { icon: FaGlobeEurope, title: "Seamless Relocation", desc: "From flight bookings to post-arrival settlement, we handle the complexities so you can focus on your new life." }
+                            { icon: FaBriefcase, title: "Verified Jobs", desc: "Access legitimate employment opportunities with trusted employers in Ireland, Germany, and across Europe.", color: "from-blue-500 to-blue-600" },
+                            { icon: FaUserMd, title: "Expert Guidance", desc: "Benefit from our specialized knowledge in visa applications, work permits, and international recruitment standards.", color: "from-primary-blue to-secondary-navy" },
+                            { icon: FaGlobeEurope, title: "Seamless Relocation", desc: "From flight bookings to post-arrival settlement, we handle the complexities so you can focus on your new life.", color: "from-primary-gold to-yellow-600" }
                         ].map((feature, index) => (
                             <motion.div
                                 key={index}
-                                className="bg-white p-10 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 group"
-                                whileHover={{ y: -10 }}
-                                initial={{ opacity: 0, y: 20 }}
+                                className="bg-white p-12 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-100 group relative overflow-hidden"
+                                whileHover={{ y: -15, scale: 1.02 }}
+                                initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ delay: index * 0.2 }}
+                                transition={{ delay: index * 0.2, type: "spring", stiffness: 100 }}
                             >
-                                <div className="w-20 h-20 bg-blue-50 rounded-2xl flex items-center justify-center text-4xl text-primary-blue mb-8 group-hover:bg-primary-blue group-hover:text-white transition-colors duration-300">
+                                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary-blue/5 to-primary-gold/5 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>
+                                
+                                <motion.div 
+                                    className={`w-24 h-24 bg-gradient-to-br ${feature.color} rounded-2xl flex items-center justify-center text-5xl text-white mb-8 shadow-lg relative z-10`}
+                                    whileHover={{ rotate: [0, -10, 10, -10, 0], scale: 1.1 }}
+                                    transition={{ duration: 0.5 }}
+                                >
                                     <feature.icon />
-                                </div>
-                                <h3 className="text-2xl font-bold mb-4 text-secondary-navy group-hover:text-primary-blue transition-colors font-heading">{feature.title}</h3>
-                                <p className="text-gray-700 leading-relaxed">{feature.desc}</p>
+                                </motion.div>
+                                <h3 className="text-2xl font-bold mb-5 text-secondary-navy group-hover:text-primary-blue transition-colors font-heading relative z-10">{feature.title}</h3>
+                                <p className="text-gray-700 leading-relaxed text-lg relative z-10">{feature.desc}</p>
                             </motion.div>
                         ))}
                     </div>
@@ -185,7 +209,10 @@ const Home = () => {
                                 640: { slidesPerView: 2 },
                                 1024: { slidesPerView: 3 },
                             }}
-                            className="pb-16 !px-4"
+                            className="pb-20 !px-4"
+                              style={{
+                                 "--swiper-pagination-bottom": "-5px"
+                            }}
                         >
                             {services.map((service) => (
                                 <SwiperSlide key={service.id} className="h-auto py-4">
@@ -245,9 +272,10 @@ const Home = () => {
                                 640: { slidesPerView: 2 },
                                 1024: { slidesPerView: 3 },
                             }}
-                            className="pb-16 !px-4"
+                            className="pb-23 !px-4"
                             style={{
                                 "--swiper-pagination-color": "#D4AF37",
+                                 "--swiper-pagination-bottom": "1px"
                             }}
                         >
                             {packages.map((pkg, index) => (
@@ -297,18 +325,48 @@ const Home = () => {
             {/* CTA Section */}
             <section className="py-28 bg-white text-center relative overflow-hidden">
                 <div className="container-custom relative z-10">
-                    <div className="max-w-4xl mx-auto bg-gradient-to-r from-primary-blue to-secondary-navy rounded-3xl p-12 md:p-20 shadow-2xl text-white relative overflow-hidden">
-                        <div className="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-primary-gold rounded-full opacity-20 blur-3xl"></div>
-                        <div className="absolute bottom-0 left-0 -mb-10 -ml-10 w-64 h-64 bg-blue-400 rounded-full opacity-20 blur-3xl"></div>
+                    <motion.div 
+                        className="max-w-5xl mx-auto bg-gradient-to-r from-primary-blue via-secondary-navy to-primary-blue rounded-3xl p-12 md:p-20 shadow-2xl text-white relative overflow-hidden"
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
+                    >
+                        <div className="absolute top-0 right-0 -mt-10 -mr-10 w-80 h-80 bg-primary-gold rounded-full opacity-20 blur-3xl animate-float"></div>
+                        <div className="absolute bottom-0 left-0 -mb-10 -ml-10 w-80 h-80 bg-blue-400 rounded-full opacity-20 blur-3xl animate-float" style={{ animationDelay: '3s' }}></div>
+                        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
 
-                        <h2 className="text-3xl md:text-5xl font-bold mb-8 relative z-10 font-heading">Ready to Transform Your Life?</h2>
-                        <p className="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl mx-auto relative z-10">
+                        <motion.h2 
+                            className="text-4xl md:text-6xl font-bold mb-8 relative z-10 font-heading"
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.2 }}
+                        >
+                            Ready to Transform Your Life?
+                        </motion.h2>
+                        <motion.p 
+                            className="text-xl md:text-2xl text-gray-200 mb-12 max-w-3xl mx-auto relative z-10 leading-relaxed"
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.4 }}
+                        >
                             Join hundreds of successful clients who have relocated with KyrosDoxa. Your international career awaits.
-                        </p>
-                        <Link to="/contact" className="btn btn-gold text-lg px-12 py-4 shadow-lg hover:shadow-white/20 relative z-10">
-                            Book a Consultation
-                        </Link>
-                    </div>
+                        </motion.p>
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.6 }}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                        >
+                            <Link to="/contact" className="btn btn-gold text-xl px-16 py-5 shadow-2xl hover:shadow-white/30 relative z-10">
+                                Book a Consultation
+                            </Link>
+                        </motion.div>
+                    </motion.div>
                 </div>
             </section>
         </div>
