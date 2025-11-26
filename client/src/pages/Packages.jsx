@@ -36,6 +36,39 @@ const Packages = () => {
                 <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-neutral-softWhite to-transparent"></div>
             </div>
 
+            {/* Visual Section */}
+            <section className="section bg-gradient-to-br from-blue-50 to-white">
+                <div className="container-custom">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-12">
+                        <motion.div
+                            className="relative"
+                            initial={{ opacity: 0, x: -50 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6 }}
+                        >
+                            <div className="absolute -inset-4 bg-gradient-to-r from-primary-blue to-primary-gold rounded-2xl opacity-20 blur-2xl"></div>
+                            <img src="https://img.freepik.com/free-photo/travel-concept-with-baggage_23-2149030852.jpg" alt="Travel Packages" className="relative w-full rounded-2xl shadow-2xl" />
+                        </motion.div>
+                        <motion.div
+                            initial={{ opacity: 0, x: 50 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6 }}
+                        >
+                            <h2 className="text-4xl font-bold mb-6 text-secondary-navy">Tailored Packages for Every Journey</h2>
+                            <p className="text-xl text-gray-700 mb-8 leading-relaxed">
+                                Whether you're a healthcare professional, IT specialist, or skilled worker, we have the perfect package to match your needs and budget.
+                            </p>
+                            <div className="grid grid-cols-2 gap-4">
+                                <img src="https://img.freepik.com/free-photo/smiling-call-center-agent-dealing-with-unhappy-customers_482257-126640.jpg" alt="Documents" className="w-full h-40 object-cover rounded-xl shadow-lg" />
+                                <img src="https://img.freepik.com/free-photo/businessman-consulting-legal-expert_74855-1103.jpg" alt="Flight" className="w-full h-40 object-cover rounded-xl shadow-lg" />
+                            </div>
+                        </motion.div>
+                    </div>
+                </div>
+            </section>
+
             <section className="section container-custom">
                 <motion.div 
                     className="bg-gradient-to-r from-yellow-50 to-orange-50 text-yellow-900 p-8 rounded-2xl border-2 border-yellow-200 mb-16 text-center max-w-4xl mx-auto shadow-lg"

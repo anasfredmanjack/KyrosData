@@ -119,6 +119,9 @@ const Home = () => {
 
             {/* Features Section */}
             <section className="section bg-neutral-softWhite relative overflow-hidden">
+                <div className="absolute inset-0 opacity-5">
+                    <img src="https://img.freepik.com/free-photo/world-map-with-pins_23-2149156362.jpg" alt="" className="w-full h-full object-cover" />
+                </div>
                 <div className="absolute top-0 left-0 w-96 h-96 bg-primary-blue/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
                 <div className="absolute bottom-0 right-0 w-96 h-96 bg-primary-gold/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
 
@@ -234,6 +237,77 @@ const Home = () => {
                 </div>
             </section>
 
+            {/* How It Works Section */}
+            <section className="section bg-gradient-to-br from-primary-blue/5 to-primary-gold/5">
+                <div className="container-custom">
+                    <motion.div 
+                        className="text-center mb-16"
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                    >
+                        <h2 className="text-4xl md:text-5xl font-bold mb-6 text-secondary-navy font-heading">Your Journey in 4 Simple Steps</h2>
+                        <p className="text-xl text-gray-700 max-w-3xl mx-auto">From consultation to arrival, we guide you every step of the way</p>
+                    </motion.div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        {[
+                            {
+                                step: "01",
+                                title: "Consultation",
+                                description: "Free assessment of your profile and goals",
+                                image: "https://img.freepik.com/free-photo/desk-scene-with-laptop_23-2147626521.jpg"
+                            },
+                            {
+                                step: "02",
+                                title: "Documentation",
+                                description: "We handle all paperwork and applications",
+                                image: "https://img.freepik.com/free-photo/male-manager-reviewing-data-clipboard_482257-119383.jpg"
+                            },
+                            {
+                                step: "03",
+                                title: "Approval",
+                                description: "Get your visa and work permit approved",
+                                image: "https://img.freepik.com/free-photo/day-office-travel-agency_23-2150769938.jpg"
+                            },
+                            {
+                                step: "04",
+                                title: "Relocation",
+                                description: "Smooth transition to your new destination",
+                                image: "https://img.freepik.com/free-photo/two-us-passports-held-near-airplane-window_23-2151983561.jpg"
+                            }
+                        ].map((item, index) => (
+                            <motion.div
+                                key={index}
+                                className="relative group"
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: index * 0.15 }}
+                                whileHover={{ y: -10 }}
+                            >
+                                <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all">
+                                    <div className="relative h-48 overflow-hidden">
+                                        <img 
+                                            src={item.image} 
+                                            alt={item.title}
+                                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                        />
+                                        <div className="absolute top-4 left-4 w-16 h-16 bg-primary-gold rounded-full flex items-center justify-center shadow-lg">
+                                            <span className="text-2xl font-bold text-secondary-navy">{item.step}</span>
+                                        </div>
+                                    </div>
+                                    <div className="p-6">
+                                        <h3 className="text-2xl font-bold mb-3 text-secondary-navy">{item.title}</h3>
+                                        <p className="text-gray-600 leading-relaxed">{item.description}</p>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
             {/* Packages Carousel Section */}
             <section className="section bg-secondary-navy text-white relative">
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
@@ -317,8 +391,134 @@ const Home = () => {
                 </div>
             </section>
 
+            {/* Destinations Section */}
+            <section className="section bg-gradient-to-br from-blue-50 to-white">
+                <div className="container-custom">
+                    <motion.div 
+                        className="text-center mb-16"
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                    >
+                        <h2 className="text-4xl md:text-5xl font-bold mb-6 text-secondary-navy font-heading">Your Next Destination Awaits</h2>
+                        <p className="text-xl text-gray-700 max-w-3xl mx-auto">Explore opportunities in top European destinations</p>
+                    </motion.div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        {[
+                            {
+                                image: "https://img.freepik.com/free-photo/deep-blue-waters-crashing-into-cliffs-moher_493961-545.jpg",
+                                country: "Ireland",
+                                description: "Tech hub with growing opportunities"
+                            },
+                            {
+                                image: "https://img.freepik.com/free-photo/view-dresden-germany_1398-2640.jpg",
+                                country: "Germany",
+                                description: "Engineering and innovation center"
+                            },
+                            {
+                                image: "https://img.freepik.com/free-photo/dark-clouds-canal-amsterdam_1304-5376.jpg",
+                                country: "Netherlands",
+                                description: "International business gateway"
+                            }
+                        ].map((destination, index) => (
+                            <motion.div
+                                key={index}
+                                className="group relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all"
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: index * 0.2 }}
+                                whileHover={{ y: -10 }}
+                            >
+                                <div className="relative h-80 overflow-hidden">
+                                    <img 
+                                        src={destination.image} 
+                                        alt={destination.country}
+                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-secondary-navy via-secondary-navy/50 to-transparent"></div>
+                                </div>
+                                <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
+                                    <h3 className="text-3xl font-bold mb-2">{destination.country}</h3>
+                                    <p className="text-gray-200 text-lg">{destination.description}</p>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Success Stories Section */}
+            <section className="section bg-white">
+                <div className="container-custom">
+                    <motion.div 
+                        className="text-center mb-16"
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                    >
+                        <h2 className="text-4xl md:text-5xl font-bold mb-6 text-secondary-navy font-heading">Success Stories</h2>
+                        <p className="text-xl text-gray-700 max-w-3xl mx-auto">Real people, real journeys, real success with KyrosDoxa</p>
+                    </motion.div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        {[
+                            {
+                                image: "https://img.freepik.com/free-photo/portrait-smiling-african-american-businessman-standing-with-arms-crossed_171337-12893.jpg",
+                                name: "David O.",
+                                role: "Healthcare Professional",
+                                country: "Ireland",
+                                quote: "KyrosDoxa made my dream of working in Ireland a reality. The process was smooth and professional."
+                            },
+                            {
+                                image: "https://img.freepik.com/free-photo/confident-african-businesswoman-smiling-closeup-portrait-jobs-career-campaign_53876-143280.jpg",
+                                name: "Sarah M.",
+                                role: "IT Specialist",
+                                country: "Germany",
+                                quote: "From visa application to settlement, they were with me every step. Highly recommended!"
+                            },
+                            {
+                                image: "https://img.freepik.com/free-photo/young-african-american-man-isolated-blue-studio-background-facial-expression_155003-23489.jpg",
+                                name: "James K.",
+                                role: "Engineer",
+                                country: "Netherlands",
+                                quote: "Professional, transparent, and reliable. They delivered exactly what they promised."
+                            }
+                        ].map((story, index) => (
+                            <motion.div
+                                key={index}
+                                className="bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all border border-gray-100"
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: index * 0.2 }}
+                                whileHover={{ y: -10 }}
+                            >
+                                <div className="flex items-center gap-4 mb-6">
+                                    <img 
+                                        src={story.image} 
+                                        alt={story.name}
+                                        className="w-16 h-16 rounded-full object-cover border-4 border-primary-gold"
+                                    />
+                                    <div>
+                                        <h4 className="font-bold text-lg text-secondary-navy">{story.name}</h4>
+                                        <p className="text-sm text-gray-600">{story.role}</p>
+                                        <p className="text-xs text-primary-blue font-semibold">Now in {story.country}</p>
+                                    </div>
+                                </div>
+                                <p className="text-gray-700 italic leading-relaxed">"{story.quote}"</p>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
             {/* CTA Section */}
             <section className="py-28 bg-white text-center relative overflow-hidden">
+                <div className="absolute inset-0 opacity-5">
+                    <img src="https://img.freepik.com/free-photo/world-map-with-pins_23-2149156588.jpg" alt="World Map" className="w-full h-full object-cover" />
+                </div>
                 <div className="container-custom relative z-10">
                     <motion.div
                         className="max-w-5xl mx-auto bg-gradient-to-r from-primary-blue via-secondary-navy to-primary-blue rounded-3xl p-12 md:p-20 shadow-2xl text-white relative overflow-hidden"

@@ -7,8 +7,8 @@ import { FaArrowRight } from 'react-icons/fa';
 const Services = () => {
     return (
         <div className="services-page font-body">
-            <div className="relative py-32 bg-cover bg-center text-center text-white overflow-hidden" style={{ backgroundImage: "linear-gradient(rgba(0, 63, 125, 0.9), rgba(10, 26, 47, 0.9)), url('https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop')" }}>
-                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+            <div className="relative py-32 bg-cover bg-center text-center text-white overflow-hidden" style={{ backgroundImage: "linear-gradient(rgba(9, 29, 216, 0.85), rgba(30, 41, 59, 0.85)), url('https://img.freepik.com/free-photo/green-plane-ecofriendly-environment_23-2151582423.jpg')" }}>
+                <div className="absolute inset-0 bg-[url('https://img.freepik.com/free-photo/green-plane-ecofriendly-environment_23-2151582423.jpg')] opacity-10"></div>
                 <div className="container-custom relative z-10">
                     <motion.h1 
                         className="text-5xl md:text-6xl text-white font-bold mb-6 font-heading"
@@ -30,7 +30,49 @@ const Services = () => {
                 <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-neutral-softWhite to-transparent"></div>
             </div>
 
+            {/* Why Choose Our Services Section */}
+            <section className="section bg-gradient-to-br from-blue-50 to-white">
+                <div className="container-custom">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
+                        <motion.div
+                            initial={{ opacity: 0, x: -50 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6 }}
+                        >
+                            <h2 className="text-4xl font-bold mb-6 text-secondary-navy">Why Our Services Stand Out</h2>
+                            <p className="text-xl text-gray-700 mb-8 leading-relaxed">
+                                We provide end-to-end support for your international relocation journey, ensuring every step is handled with expertise and care.
+                            </p>
+                            <div className="grid grid-cols-2 gap-4">
+                                <img src="https://img.freepik.com/free-photo/day-office-travel-agency_23-2150769938.jpg" alt="Visa Approval" className="w-full h-40 object-cover rounded-xl shadow-lg" />
+                                <img src="https://img.freepik.com/free-photo/business-handshake-agreement_53876-13391.jpg" alt="Partnership" className="w-full h-40 object-cover rounded-xl shadow-lg" />
+                            </div>
+                        </motion.div>
+                        <motion.div
+                            initial={{ opacity: 0, x: 50 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6 }}
+                            className="relative"
+                        >
+                            <div className="absolute -inset-4 bg-gradient-to-r from-primary-blue to-primary-gold rounded-2xl opacity-20 blur-2xl"></div>
+                            <img src="https://img.freepik.com/free-photo/happy-positive-business-partners-finishing-meeting_74855-2918.jpg" alt="Travel Ready" className="relative w-full rounded-2xl shadow-2xl" />
+                        </motion.div>
+                    </div>
+                </div>
+            </section>
+
             <section className="section container-custom">
+                <motion.div 
+                    className="text-center mb-16"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                >
+                    <h2 className="text-4xl md:text-5xl font-bold mb-6 text-secondary-navy font-heading">Our Comprehensive Services</h2>
+                    <p className="text-xl text-gray-700 max-w-3xl mx-auto">Everything you need for a successful international relocation</p>
+                </motion.div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                     {services.map((service, index) => (
                         <motion.div

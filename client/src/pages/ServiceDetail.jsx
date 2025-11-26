@@ -4,6 +4,21 @@ import { motion } from 'framer-motion';
 import { services } from '../data/services';
 import { FaCheck, FaArrowLeft } from 'react-icons/fa';
 
+const getServiceImage = (serviceId) => {
+    const images = {
+        1: 'https://img.freepik.com/free-photo/medium-shot-people-travel-agency_23-2149080779.jpg',
+        2: 'https://img.freepik.com/free-photo/businessman-consulting-legal-expert_74855-1103.jpg',
+        3: 'https://img.freepik.com/free-photo/construction-worker-site_23-2149124277.jpg',
+        4: 'https://img.freepik.com/free-photo/delivery-person-getting-parcel-out-delivery_23-2149371930.jpg',
+        5: 'https://img.freepik.com/free-photo/businessman-consulting-legal-expert_74855-1103.jpg',
+        6: 'https://img.freepik.com/free-photo/day-office-travel-agency_23-2150769938.jpg',
+        7: 'https://img.freepik.com/free-photo/parents-playing-together-with-their-children_23-2148467015.jpg',
+        8: 'https://img.freepik.com/free-photo/smiling-call-center-agent-dealing-with-unhappy-customers_482257-126640.jpg',
+        9: 'https://img.freepik.com/free-photo/day-office-travel-agency_23-2150769947.jpg'
+    };
+    return images[serviceId] || 'https://img.freepik.com/free-photo/travel-concept-with-landmarks_23-2149153256.jpg';
+};
+
 const ServiceDetail = () => {
     const { id } = useParams();
     const navigate = useNavigate();
@@ -62,6 +77,27 @@ const ServiceDetail = () => {
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
                     >
+                        {/* Service Image */}
+                        <div className="relative mb-8 rounded-2xl overflow-hidden shadow-2xl">
+                            <img 
+                                src={getServiceImage(service.id)} 
+                                alt={service.title}
+                                className="w-full h-80 object-cover"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-secondary-navy/80 to-transparent"></div>
+                            <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
+                                <div className="flex items-center gap-4">
+                                    <div className="w-16 h-16 bg-primary-gold rounded-xl flex items-center justify-center text-3xl">
+                                        <service.icon />
+                                    </div>
+                                    <div>
+                                        <h2 className="text-3xl font-bold">{service.title}</h2>
+                                        <p className="text-gray-200">Professional migration services</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div className="bg-white p-10 rounded-2xl shadow-lg border border-gray-100 mb-8">
                             <h2 className="text-3xl font-bold mb-6 text-primary-blue">Overview</h2>
                             <p className="text-xl text-gray-700 leading-relaxed">{service.fullDesc}</p>
@@ -86,6 +122,38 @@ const ServiceDetail = () => {
                                         <span className="text-gray-700 text-lg">{feature}</span>
                                     </motion.div>
                                 ))}
+                            </div>
+                        </div>
+
+                        {/* Why Choose This Service */}
+                        <div className="bg-gradient-to-br from-blue-50 to-white p-10 rounded-2xl shadow-lg border border-gray-100 mb-8">
+                            <h3 className="text-2xl font-bold mb-8 text-secondary-navy">Why Choose This Service?</h3>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div className="space-y-4">
+                                    <div className="flex items-start gap-3">
+                                        <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                            <FaCheck className="text-green-600 text-sm" />
+                                        </div>
+                                        <div>
+                                            <h4 className="font-bold text-lg text-secondary-navy mb-1">Expert Guidance</h4>
+                                            <p className="text-gray-600">Professional support throughout the entire process</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-start gap-3">
+                                        <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                            <FaCheck className="text-green-600 text-sm" />
+                                        </div>
+                                        <div>
+                                            <h4 className="font-bold text-lg text-secondary-navy mb-1">Fast Processing</h4>
+                                            <p className="text-gray-600">Efficient handling of all documentation</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <img 
+                                    src="https://img.freepik.com/free-photo/business-people-shaking-hands-together_53876-13393.jpg" 
+                                    alt="Professional Service" 
+                                    className="w-full h-48 object-cover rounded-xl shadow-lg"
+                                />
                             </div>
                         </div>
 

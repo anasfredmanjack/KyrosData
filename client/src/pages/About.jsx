@@ -22,7 +22,7 @@ const About = () => {
     return (
         <div className="about-page">
             {/* Hero Section */}
-            <div className="relative py-32 bg-cover bg-center text-center text-white overflow-hidden" style={{ backgroundImage: "linear-gradient(rgba(0, 63, 125, 0.9), rgba(10, 26, 47, 0.9)), url('https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=2069&auto=format&fit=crop')" }}>
+            <div className="relative py-32 bg-cover bg-center text-center text-white overflow-hidden" style={{ backgroundImage: "linear-gradient(rgba(9, 29, 216, 0.85), rgba(30, 41, 59, 0.85)), url('https://img.freepik.com/free-photo/diverse-business-people-working-office_23-2147656717.jpg')" }}>
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
                 <div className="container-custom relative z-10">
                     <motion.h1 
@@ -92,9 +92,15 @@ const About = () => {
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
                     >
-                        <div className="relative">
-                            <div className="absolute -inset-4 bg-gradient-to-r from-primary-blue to-primary-gold rounded-2xl opacity-20 blur-2xl"></div>
-                            <img src="https://img.freepik.com/free-photo/group-diverse-people-having-business-meeting_53876-25060.jpg" alt="Team Meeting" className="relative w-full rounded-2xl shadow-2xl" />
+                        <div className="space-y-6">
+                            <div className="relative">
+                                <div className="absolute -inset-4 bg-gradient-to-r from-primary-blue to-primary-gold rounded-2xl opacity-20 blur-2xl"></div>
+                                <img src="https://img.freepik.com/free-photo/travel-concept-with-baggage_23-2149153260.jpg" alt="Team Meeting" className="relative w-full rounded-2xl shadow-2xl" />
+                            </div>
+                            <div className="grid grid-cols-2 gap-4">
+                                <img src="https://img.freepik.com/free-photo/top-view-hands-holding-travel-documents_23-2150433383.jpg" alt="Travel Documents" className="w-full h-48 object-cover rounded-xl shadow-lg" />
+                                <img src="https://img.freepik.com/free-photo/green-plane-ecofriendly-environment_23-2151582376.jpg" alt="Airplane View" className="w-full h-48 object-cover rounded-xl shadow-lg" />
+                            </div>
                         </div>
                     </motion.div>
                 </div>

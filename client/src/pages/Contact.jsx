@@ -52,12 +52,13 @@ const Contact = () => {
 
     return (
         <div className="contact-page font-body">
-            <div className="bg-secondary-navy py-24 text-center text-white relative overflow-hidden">
+            <div className="relative py-24 bg-cover bg-center text-center text-white overflow-hidden" style={{ backgroundImage: "linear-gradient(rgba(9, 29, 216, 0.9), rgba(30, 41, 59, 0.9)), url('https://img.freepik.com/free-photo/customer-service-concept-with-woman-headset_23-2149116138.jpg')" }}>
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
                 <div className="container-custom relative z-10">
-                    <h1 className="text-5xl md:text-6xl font-bold mb-6 font-heading">Contact Us</h1>
+                    <h1 className="text-5xl md:text-6xl font-bold mb-6 font-heading text-white">Contact Us</h1>
                     <p className="text-xl opacity-90 max-w-2xl mx-auto">Get in touch to start your global journey. We are here to answer your questions.</p>
                 </div>
+                <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-neutral-softWhite to-transparent"></div>
             </div>
 
             <section className="section container-custom">
