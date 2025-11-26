@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaEnvelope, FaPhone, FaMapMarkerAlt, FaTiktok } from 'react-icons/fa';
 
 const Footer = () => {
     const socialLinks = [
-        { icon: FaFacebook, href: '#', label: 'Facebook' },
-        { icon: FaTwitter, href: '#', label: 'Twitter' },
-        { icon: FaInstagram, href: '#', label: 'Instagram' },
-        { icon: FaLinkedin, href: '#', label: 'LinkedIn' },
+        { icon: FaFacebook, href: 'https://www.facebook.com/p/KyrosDoxa-Consulting-Limited-100064242453481/', label: 'Facebook' },
+        { icon: FaTiktok, href: 'https://www.tiktok.com/@kyrosdoxa', label: 'Tiktok' },
+        { icon: FaInstagram, href: 'https://www.instagram.com/kyrosdoxa_consulting_limited/', label: 'Instagram' },
+        { icon: FaLinkedin, href: 'https://ng.linkedin.com/in/kyrosdoxa-consulting-limited-93b388377', label: 'LinkedIn' },
     ];
 
     const quickLinks = [

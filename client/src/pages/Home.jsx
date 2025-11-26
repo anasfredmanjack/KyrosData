@@ -1,7 +1,7 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { FaBriefcase, FaUserMd, FaGlobeEurope, FaArrowRight, FaCheck, FaStar, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { FaBriefcase, FaUserMd, FaGlobeEurope, FaArrowRight, FaCheck, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import { services } from '../data/services';
@@ -15,11 +15,9 @@ import 'swiper/css/pagination';
 const Home = () => {
     const navigate = useNavigate();
 
-    // Refs for custom navigation
-    const servicePrevRef = useRef(null);
-    const serviceNextRef = useRef(null);
-    const packagePrevRef = useRef(null);
-    const packageNextRef = useRef(null);
+    // Refs for Swiper instances
+    const serviceSwiperRef = useRef(null);
+    const packageSwiperRef = useRef(null);
 
     const fadeIn = {
         hidden: { opacity: 0, y: 20 },
@@ -102,8 +100,8 @@ const Home = () => {
                             { number: "24/7", label: "Expert Support" },
                             { number: "10+", label: "Countries" }
                         ].map((stat, index) => (
-                            <motion.div 
-                                key={index} 
+                            <motion.div
+                                key={index}
                                 className="p-6 group cursor-default"
                                 initial={{ opacity: 0, scale: 0.5 }}
                                 whileInView={{ opacity: 1, scale: 1 }}
@@ -123,9 +121,9 @@ const Home = () => {
             <section className="section bg-neutral-softWhite relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-96 h-96 bg-primary-blue/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
                 <div className="absolute bottom-0 right-0 w-96 h-96 bg-primary-gold/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
-                
+
                 <div className="container-custom relative z-10">
-                    <motion.div 
+                    <motion.div
                         className="text-center mb-20 max-w-3xl mx-auto"
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -153,8 +151,8 @@ const Home = () => {
                                 transition={{ delay: index * 0.2, type: "spring", stiffness: 100 }}
                             >
                                 <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary-blue/5 to-primary-gold/5 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>
-                                
-                                <motion.div 
+
+                                <motion.div
                                     className={`w-24 h-24 bg-gradient-to-br ${feature.color} rounded-2xl flex items-center justify-center text-5xl text-white mb-8 shadow-lg relative z-10`}
                                     whileHover={{ rotate: [0, -10, 10, -10, 0], scale: 1.1 }}
                                     transition={{ duration: 0.5 }}
@@ -184,25 +182,24 @@ const Home = () => {
 
                     <div className="relative px-4 md:px-12 group">
                         {/* Custom Navigation Buttons */}
-                        <button ref={servicePrevRef} className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 bg-white text-primary-blue rounded-full shadow-lg flex items-center justify-center hover:bg-primary-blue hover:text-white transition-all duration-300 border border-gray-100 focus:outline-none -ml-2 md:-ml-6 opacity-0 group-hover:opacity-100">
+                        <button 
+                            onClick={() => serviceSwiperRef.current?.slidePrev()}
+                            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 bg-white text-primary-blue rounded-full shadow-lg flex items-center justify-center hover:bg-primary-blue hover:text-white transition-all duration-300 border border-gray-100 focus:outline-none -ml-2 md:-ml-6 opacity-100 md:opacity-0 md:group-hover:opacity-100"
+                        >
                             <FaChevronLeft className="text-lg" />
                         </button>
-                        <button ref={serviceNextRef} className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 bg-white text-primary-blue rounded-full shadow-lg flex items-center justify-center hover:bg-primary-blue hover:text-white transition-all duration-300 border border-gray-100 focus:outline-none -mr-2 md:-mr-6 opacity-0 group-hover:opacity-100">
+                        <button 
+                            onClick={() => serviceSwiperRef.current?.slideNext()}
+                            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 bg-white text-primary-blue rounded-full shadow-lg flex items-center justify-center hover:bg-primary-blue hover:text-white transition-all duration-300 border border-gray-100 focus:outline-none -mr-2 md:-mr-6 opacity-100 md:opacity-0 md:group-hover:opacity-100"
+                        >
                             <FaChevronRight className="text-lg" />
                         </button>
 
                         <Swiper
                             modules={[Navigation, Pagination, Autoplay]}
+                            onSwiper={(swiper) => { serviceSwiperRef.current = swiper; }}
                             spaceBetween={30}
                             slidesPerView={1}
-                            navigation={{
-                                prevEl: servicePrevRef.current,
-                                nextEl: serviceNextRef.current,
-                            }}
-                            onBeforeInit={(swiper) => {
-                                swiper.params.navigation.prevEl = servicePrevRef.current;
-                                swiper.params.navigation.nextEl = serviceNextRef.current;
-                            }}
                             pagination={{ clickable: true }}
                             autoplay={{ delay: 5000, disableOnInteraction: false }}
                             breakpoints={{
@@ -210,8 +207,8 @@ const Home = () => {
                                 1024: { slidesPerView: 3 },
                             }}
                             className="pb-20 !px-4"
-                              style={{
-                                 "--swiper-pagination-bottom": "-5px"
+                            style={{
+                                "--swiper-pagination-bottom": "-5px"
                             }}
                         >
                             {services.map((service) => (
@@ -248,34 +245,32 @@ const Home = () => {
 
                     <div className="relative px-4 md:px-12 group">
                         {/* Custom Navigation Buttons */}
-                        <button ref={packagePrevRef} className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 bg-secondary-navy text-primary-gold rounded-full shadow-lg flex items-center justify-center hover:bg-primary-gold hover:text-secondary-navy transition-all duration-300 border border-primary-gold/30 focus:outline-none -ml-2 md:-ml-6 opacity-0 group-hover:opacity-100">
+                        <button 
+                            onClick={() => packageSwiperRef.current?.slidePrev()}
+                            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 bg-secondary-navy text-primary-gold rounded-full shadow-lg flex items-center justify-center hover:bg-primary-gold hover:text-secondary-navy transition-all duration-300 border border-primary-gold/30 focus:outline-none -ml-2 md:-ml-6 opacity-100 md:opacity-0 md:group-hover:opacity-100"
+                        >
                             <FaChevronLeft className="text-lg" />
                         </button>
-                        <button ref={packageNextRef} className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 bg-secondary-navy text-primary-gold rounded-full shadow-lg flex items-center justify-center hover:bg-primary-gold hover:text-secondary-navy transition-all duration-300 border border-primary-gold/30 focus:outline-none -mr-2 md:-mr-6 opacity-0 group-hover:opacity-100">
+                        <button 
+                            onClick={() => packageSwiperRef.current?.slideNext()}
+                            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 bg-secondary-navy text-primary-gold rounded-full shadow-lg flex items-center justify-center hover:bg-primary-gold hover:text-secondary-navy transition-all duration-300 border border-primary-gold/30 focus:outline-none -mr-2 md:-mr-6 opacity-100 md:opacity-0 md:group-hover:opacity-100"
+                        >
                             <FaChevronRight className="text-lg" />
                         </button>
 
                         <Swiper
                             modules={[Navigation, Pagination]}
+                            onSwiper={(swiper) => { packageSwiperRef.current = swiper; }}
                             spaceBetween={30}
                             slidesPerView={1}
-                            navigation={{
-                                prevEl: packagePrevRef.current,
-                                nextEl: packageNextRef.current,
-                            }}
-                            onBeforeInit={(swiper) => {
-                                swiper.params.navigation.prevEl = packagePrevRef.current;
-                                swiper.params.navigation.nextEl = packageNextRef.current;
-                            }}
                             pagination={{ clickable: true, dynamicBullets: true }}
                             breakpoints={{
                                 640: { slidesPerView: 2 },
                                 1024: { slidesPerView: 3 },
                             }}
-                            className="pb-23 !px-4"
+                            className="pb-20 !px-4"
                             style={{
-                                "--swiper-pagination-color": "#D4AF37",
-                                 "--swiper-pagination-bottom": "1px"
+                                "--swiper-pagination-color": "#F59E0B",
                             }}
                         >
                             {packages.map((pkg, index) => (
@@ -325,7 +320,7 @@ const Home = () => {
             {/* CTA Section */}
             <section className="py-28 bg-white text-center relative overflow-hidden">
                 <div className="container-custom relative z-10">
-                    <motion.div 
+                    <motion.div
                         className="max-w-5xl mx-auto bg-gradient-to-r from-primary-blue via-secondary-navy to-primary-blue rounded-3xl p-12 md:p-20 shadow-2xl text-white relative overflow-hidden"
                         initial={{ opacity: 0, scale: 0.9 }}
                         whileInView={{ opacity: 1, scale: 1 }}
@@ -336,7 +331,7 @@ const Home = () => {
                         <div className="absolute bottom-0 left-0 -mb-10 -ml-10 w-80 h-80 bg-blue-400 rounded-full opacity-20 blur-3xl animate-float" style={{ animationDelay: '3s' }}></div>
                         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
 
-                        <motion.h2 
+                        <motion.h2
                             className="text-4xl md:text-6xl font-bold mb-8 relative z-10 font-heading"
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
@@ -345,7 +340,7 @@ const Home = () => {
                         >
                             Ready to Transform Your Life?
                         </motion.h2>
-                        <motion.p 
+                        <motion.p
                             className="text-xl md:text-2xl text-gray-200 mb-12 max-w-3xl mx-auto relative z-10 leading-relaxed"
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
