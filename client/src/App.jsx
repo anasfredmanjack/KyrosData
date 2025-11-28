@@ -7,6 +7,7 @@ import About from './pages/About';
 import Services from './pages/Services';
 import ServiceDetail from './pages/ServiceDetail';
 import Packages from './pages/Packages';
+import Countries from './pages/Countries';
 import Contact from './pages/Contact';
 import ScrollToTop from './components/ScrollToTop';
 
@@ -23,6 +24,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/services" element={<Services />} />
         <Route path="/services/:id" element={<ServiceDetail />} />
+        <Route path="/countries" element={<Countries />} />
         <Route path="/packages" element={<Packages />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>

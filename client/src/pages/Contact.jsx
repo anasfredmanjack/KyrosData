@@ -6,6 +6,7 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { services } from '../data/services';
 import { packages } from '../data/packages';
+import { countries } from '../data/countries';
 
 const Contact = () => {
     const location = useLocation();
@@ -20,12 +21,20 @@ const Contact = () => {
     const [status, setStatus] = useState('');
 
     useEffect(() => {
-        if (location.state && location.state.selectedPackage) {
-            setFormData(prev => ({
-                ...prev,
-                package: location.state.selectedPackage,
-                message: `I am interested in the ${location.state.selectedPackage}. Please provide more information.`
-            }));
+        if (location.state) {
+            if (location.state.selectedPackage) {
+                setFormData(prev => ({
+                    ...prev,
+                    package: location.state.selectedPackage,
+                    message: `I am interested in the ${location.state.selectedPackage}. Please provide more information.`
+                }));
+            } else if (location.state.selectedCountry) {
+                setFormData(prev => ({
+                    ...prev,
+                    package: location.state.selectedCountry,
+                    message: `I am interested in opportunities in ${location.state.selectedCountry}. Please provide more information.`
+                }));
+            }
         }
     }, [location.state]);
 
@@ -39,7 +48,42 @@ const Contact = () => {
         const loadingToast = toast.loading('Sending message...');
         try {
             const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
-            await axios.post(`${apiUrl}/contact`, formData);
+
+            // Find details of selected item
+            let details = '';
+            const selectedName = formData.package;
+
+            if (selectedName) {
+                const service = services.find(s => s.title === selectedName);
+                const pkg = packages.find(p => p.title === selectedName);
+                const country = countries.find(c => c.name === selectedName);
+
+                if (service) {
+                    details = `
+                        <h3>Service Details: ${service.title}</h3>
+                        <p><strong>Description:</strong> ${service.shortDesc}</p>
+                        <p><strong>Features:</strong> ${service.features.join(', ')}</p>
+                    `;
+                } else if (pkg) {
+                    details = `
+                        <h3>Package Details: ${pkg.title}</h3>
+                        <p><strong>Price:</strong> ${pkg.price}</p>
+                        <p><strong>Description:</strong> ${pkg.description}</p>
+                        <p><strong>Features:</strong> ${pkg.features.join(', ')}</p>
+                    `;
+                } else if (country) {
+                    details = `
+                        <h3>Country Details: ${country.name}</h3>
+                        <p><strong>Jobs:</strong> ${country.jobs.join(', ')}</p>
+                        <p><strong>Salary:</strong> ${country.salary}</p>
+                        <p><strong>Visa:</strong> ${country.visa}</p>
+                        <p><strong>Processing Time:</strong> ${country.processingTime || 'N/A'}</p>
+                        <p><strong>Fee:</strong> ${country.fee}</p>
+                    `;
+                }
+            }
+
+            await axios.post(`${apiUrl}/contact`, { ...formData, details });
             setStatus('success');
             toast.success('Message sent successfully! We will contact you shortly.', { id: loadingToast });
             setFormData({ name: '', email: '', phone: '', service: '', package: '', message: '' });
@@ -63,7 +107,7 @@ const Contact = () => {
 
             <section className="section container-custom">
                 <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
-                    <motion.div 
+                    <motion.div
                         className="lg:col-span-2 space-y-8"
                         initial={{ opacity: 0, x: -50 }}
                         whileInView={{ opacity: 1, x: 0 }}
@@ -81,7 +125,7 @@ const Contact = () => {
                                 { icon: FaPhone, title: 'Call Us', content: ['09047575374', '0701 093 5596'] },
                                 { icon: FaEnvelope, title: 'Email Us', content: 'KyrosDoxa@Gmail.com' }
                             ].map((item, index) => (
-                                <motion.div 
+                                <motion.div
                                     key={index}
                                     className="flex gap-5 group bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition-all"
                                     initial={{ opacity: 0, y: 20 }}
@@ -106,7 +150,7 @@ const Contact = () => {
                         </div>
                     </motion.div>
 
-                    <motion.div 
+                    <motion.div
                         className="lg:col-span-3 bg-white p-10 rounded-2xl shadow-xl border border-gray-100"
                         initial={{ opacity: 0, x: 50 }}
                         whileInView={{ opacity: 1, x: 0 }}
@@ -173,6 +217,11 @@ const Contact = () => {
                                         <optgroup label="Packages">
                                             {packages.map((pkg, index) => (
                                                 <option key={`pkg-${index}`} value={pkg.title}>{pkg.title}</option>
+                                            ))}
+                                        </optgroup>
+                                        <optgroup label="Countries">
+                                            {countries.map((country) => (
+                                                <option key={`country-${country.id}`} value={country.name}>{country.name}</option>
                                             ))}
                                         </optgroup>
                                         <option value="Other">Other Inquiry</option>

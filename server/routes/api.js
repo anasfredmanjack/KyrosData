@@ -7,7 +7,7 @@ require('dotenv').config();
 // POST /api/contact - Submit inquiry and send email
 router.post('/contact', async (req, res) => {
     try {
-        const { name, email, phone, service, package, message } = req.body;
+        const { name, email, phone, service, package, message, details } = req.body;
 
         // 1. Save to Database
         const newInquiry = new Inquiry({
@@ -47,6 +47,9 @@ router.post('/contact', async (req, res) => {
                         .label { font-weight: bold; color: #003F7D; }
                         .footer { background-color: #f8f9fa; padding: 15px; text-align: center; font-size: 12px; color: #666; border-top: 1px solid #eee; }
                         .button { display: inline-block; padding: 10px 20px; background-color: #D4AF37; color: #0A1A2F; text-decoration: none; border-radius: 5px; font-weight: bold; margin-top: 15px; }
+                        .details-box { background: #eef2f7; padding: 15px; border-radius: 5px; border: 1px solid #d1d9e6; margin-top: 10px; }
+                        .details-box h3 { margin-top: 0; color: #003F7D; font-size: 16px; }
+                        .details-box p { margin: 5px 0; font-size: 14px; }
                     </style>
                 </head>
                 <body>
@@ -72,6 +75,9 @@ router.post('/contact', async (req, res) => {
                 <div class="field"><span class="label">Email:</span> ${email}</div>
                 <div class="field"><span class="label">Phone:</span> ${phone || 'N/A'}</div>
                 <div class="field"><span class="label">Service/Package:</span> ${package || service || 'General Inquiry'}</div>
+                
+                ${details ? `<div class="field"><span class="label">Selected Item Details:</span><div class="details-box">${details}</div></div>` : ''}
+
                 <div class="field">
                     <span class="label">Message:</span><br>
                     <div style="background: #f9f9f9; padding: 15px; border-left: 4px solid #D4AF37; margin-top: 5px;">
@@ -91,6 +97,9 @@ router.post('/contact', async (req, res) => {
             const userContent = `
                 <h2 style="color: #003F7D; margin-top: 0;">Hello ${name},</h2>
                 <p>Thank you for reaching out to <strong>KyrosData</strong>. We have received your inquiry regarding <strong>${package || service || 'our services'}</strong>.</p>
+                
+                ${details ? `<div style="margin: 20px 0;"><div class="label">Here are the details of what you inquired about:</div><div class="details-box">${details}</div></div>` : ''}
+
                 <p>Our team is currently reviewing your request and a representative will get back to you shortly to discuss how we can assist you.</p>
                 <p>If you have any urgent questions, please feel free to reply to this email.</p>
                 <br>

@@ -22,29 +22,29 @@ const Navbar = () => {
         { name: 'Home', path: '/' },
         { name: 'About', path: '/about' },
         { name: 'Services', path: '/services' },
+        { name: 'Countries', path: '/countries' },
         { name: 'Packages', path: '/packages' },
         { name: 'Contact', path: '/contact' },
     ];
 
     return (
-        <motion.nav 
-            className={`sticky top-0 z-50 h-20 flex items-center transition-all duration-300 ${
-                scrolled ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-white shadow-md'
-            }`}
+        <motion.nav
+            className={`sticky top-0 z-50 h-20 flex items-center transition-all duration-300 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-white shadow-md'
+                }`}
             initial={{ y: -100 }}
             animate={{ y: 0 }}
             transition={{ duration: 0.5 }}
         >
             <div className="container-custom flex justify-between items-center w-full">
                 <Link to="/" className="font-heading text-2xl  tracking-tight group">
-                    <motion.span 
+                    <motion.span
                         className="text-[#091DD8] font-bold inline-block"
                         whileHover={{ scale: 1.05 }}
                         transition={{ type: "spring", stiffness: 400 }}
                     >
                         Kyros
                     </motion.span>
-                    <motion.span 
+                    <motion.span
                         className="text-[#091DD8] italic inline-block"
                         whileHover={{ scale: 1.05 }}
                         transition={{ type: "spring", stiffness: 400 }}
@@ -53,7 +53,7 @@ const Navbar = () => {
                     </motion.span>
                 </Link>
 
-                <motion.div 
+                <motion.div
                     className="md:hidden text-2xl cursor-pointer text-primary-blue"
                     onClick={toggleMenu}
                     whileTap={{ scale: 0.9 }}
@@ -64,7 +64,7 @@ const Navbar = () => {
                 {/* Desktop Menu */}
                 <ul className="hidden md:flex items-center gap-8">
                     {navLinks.map((link, index) => (
-                        <motion.li 
+                        <motion.li
                             key={index}
                             initial={{ opacity: 0, y: -20 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -75,7 +75,7 @@ const Navbar = () => {
                                 className={`font-semibold text-secondary-navy hover:text-primary-blue relative group ${location.pathname === link.path ? 'text-primary-blue' : ''}`}
                             >
                                 {link.name}
-                                <motion.span 
+                                <motion.span
                                     className="absolute -bottom-1 left-0 h-0.5 bg-primary-gold"
                                     initial={{ width: 0 }}
                                     animate={{ width: location.pathname === link.path ? '100%' : 0 }}
@@ -99,7 +99,7 @@ const Navbar = () => {
                 {/* Mobile Menu */}
                 <AnimatePresence>
                     {isOpen && (
-                        <motion.ul 
+                        <motion.ul
                             className="md:hidden absolute top-20 left-0 w-full bg-white shadow-2xl p-8 border-t border-gray-100"
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: 'auto' }}
@@ -107,8 +107,8 @@ const Navbar = () => {
                             transition={{ duration: 0.3 }}
                         >
                             {navLinks.map((link, index) => (
-                                <motion.li 
-                                    key={index} 
+                                <motion.li
+                                    key={index}
                                     className="my-4 text-center"
                                     initial={{ opacity: 0, x: -20 }}
                                     animate={{ opacity: 1, x: 0 }}
@@ -123,7 +123,7 @@ const Navbar = () => {
                                     </Link>
                                 </motion.li>
                             ))}
-                            <motion.li 
+                            <motion.li
                                 className="text-center mt-6"
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
