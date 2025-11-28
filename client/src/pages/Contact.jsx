@@ -61,24 +61,24 @@ const Contact = () => {
                 if (service) {
                     details = `
                         <h3>Service Details: ${service.title}</h3>
-                        <p><strong>Description:</strong> ${service.shortDesc}</p>
-                        <p><strong>Features:</strong> ${service.features.join(', ')}</p>
+                        ${service.shortDesc ? `<p><strong>Description:</strong> ${service.shortDesc}</p>` : ''}
+                        ${service.features && service.features.length > 0 ? `<p><strong>Features:</strong> ${service.features.join(', ')}</p>` : ''}
                     `;
                 } else if (pkg) {
                     details = `
                         <h3>Package Details: ${pkg.title}</h3>
-                        <p><strong>Price:</strong> ${pkg.price}</p>
-                        <p><strong>Description:</strong> ${pkg.description}</p>
-                        <p><strong>Features:</strong> ${pkg.features.join(', ')}</p>
+                        ${pkg.price ? `<p><strong>Price:</strong> ${pkg.price}</p>` : ''}
+                        ${pkg.desc ? `<p><strong>Description:</strong> ${pkg.desc}</p>` : ''}
+                        ${pkg.features && pkg.features.length > 0 ? `<p><strong>Features:</strong> ${pkg.features.join(', ')}</p>` : ''}
                     `;
                 } else if (country) {
                     details = `
                         <h3>Country Details: ${country.name}</h3>
-                        <p><strong>Jobs:</strong> ${country.jobs.join(', ')}</p>
-                        <p><strong>Salary:</strong> ${country.salary}</p>
-                        <p><strong>Visa:</strong> ${country.visa}</p>
-                        <p><strong>Processing Time:</strong> ${country.processingTime || 'N/A'}</p>
-                        <p><strong>Fee:</strong> ${country.fee}</p>
+                        ${country.jobs && country.jobs.length > 0 ? `<p><strong>Jobs:</strong> ${country.jobs.join(', ')}</p>` : ''}
+                        ${country.salary ? `<p><strong>Salary:</strong> ${country.salary}</p>` : ''}
+                        ${country.visa ? `<p><strong>Visa:</strong> ${country.visa}</p>` : ''}
+                        ${country.processingTime ? `<p><strong>Processing Time:</strong> ${country.processingTime}</p>` : ''}
+                        ${country.fee ? `<p><strong>Fee:</strong> ${country.fee}</p>` : ''}
                     `;
                 }
             }
