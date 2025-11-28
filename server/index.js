@@ -29,6 +29,12 @@ app.get('/', (req, res) => {
     res.send('KyrosDoxa API Running');
 });
 
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+// Only start the server if not in Vercel serverless environment
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+    app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+    });
+}
+
+// Export the Express app for Vercel serverless
+module.exports = app;
