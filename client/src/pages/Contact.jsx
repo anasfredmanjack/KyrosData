@@ -47,7 +47,8 @@ const Contact = () => {
         setStatus('sending');
         const loadingToast = toast.loading('Sending message...');
         try {
-            const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+            // Use relative path for production (Vercel), localhost for development
+            const apiUrl = import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://localhost:5000/api' : '/api');
 
             // Find details of selected item
             let details = '';
